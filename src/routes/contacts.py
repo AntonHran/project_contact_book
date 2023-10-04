@@ -54,8 +54,8 @@ async def get_contact(contact_id: int = Path(ge=1),
                       db: Session = Depends(get_db)):
     """
     The get_contact function is a GET request that returns the contact with the given ID.
-    The function takes in an integer as a path parameter, and uses it to query for the contact.
-    If no such contact exists, then an HTTP 404 error is returned.
+    The function takes in an integer as a path parameter, and uses it to query for the
+    contact. If no such contact exists, then an HTTP 404 error is returned.
 
     :param contact_id: int: Get the contact id from the path
     :param current_user: User: Get the current user from the database

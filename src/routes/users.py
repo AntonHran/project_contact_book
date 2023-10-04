@@ -25,7 +25,8 @@ async def read_users_me(current_user: User = Depends(auth_user.get_current_user)
 
 
 @router.patch('/avatar', response_model=UserResponse)
-async def update_avatar_user(file: UploadFile = File(), current_user: User = Depends(auth_user.get_current_user),
+async def update_avatar_user(file: UploadFile = File(),
+                             current_user: User = Depends(auth_user.get_current_user),
                              db: Session = Depends(get_db)):
     """
     The update_avatar_user function updates the avatar of a user.

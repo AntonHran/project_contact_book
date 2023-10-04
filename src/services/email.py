@@ -25,11 +25,14 @@ conf = ConnectionConfig(
 
 async def send_email(email: EmailStr, username: str, host: str):
     """
-    The send_email function sends an email to the user with a link that they can click on to verify their email address.
+    The send_email function sends an email to the user with a link that they can click on
+    to verify their email address.
     The function takes in three parameters:
         -email: The user's email address, which is used as the recipient of the message.
-        -username: The username of the user, which is used in a greeting within the body of the message.
-        -host: The hostname (domain) where this application is running, which will be included in a link within
+        -username: The username of the user, which is used in a greeting within the body of
+        the message.
+        -host: The hostname (domain) where this application is running, which will be
+        included in a link within
 
     :param email: EmailStr: Validate the email address
     :param username: str: Pass the username to the email template

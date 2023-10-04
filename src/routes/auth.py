@@ -20,9 +20,12 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 security = HTTPBearer()
 
 
-@router.post("/signup", response_model=UserResponse, dependencies=[Depends(RateLimiter(times=3, seconds=60))],
-             status_code=status.HTTP_201_CREATED, description="For all. No more than 3 attempts to register per minute.")
-async def signup(body: UserModel, background_task: BackgroundTasks, request: Request, db: Session = Depends(get_db)):
+@router.post("/signup", response_model=UserResponse,
+             dependencies=[Depends(RateLimiter(times=3, seconds=60))],
+             status_code=status.HTTP_201_CREATED,
+             description="For all. No more than 3 attempts per minute to register.")
+async def signup(body: UserModel, background_task: BackgroundTasks,
+                 request: Request, db: Session = Depends(get_db)):
     """
     The signup function creates a new user in the database.
         It takes in a UserModel object, which is validated by pydantic.
@@ -40,7 +43,8 @@ async def signup(body: UserModel, background_task: BackgroundTasks, request: Req
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Account already exists")
     body.password = auth_password.get_password_hash(body.password)
     new_user = await repository_users.create_user(body, db)
-    background_task.add_task(send_email, new_user.email, new_user.username, str(request.base_url))
+    background_task.add_task(send_email, new_user.email,
+                             new_user.username, str(request.base_url))
     return new_user
 
 
@@ -67,17 +71,22 @@ async def login(body: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
     access_token = await auth_token.create_access_token(data={"sub": user.email})
     refresh_token_ = await auth_token.create_refresh_token(data={"sub": user.email})
     await repository_users.update_token(user, refresh_token_, db)
-    return {"access_token": access_token, "refresh_token": refresh_token_, "token_type": messages.TOKEN_TYPE}
+    return {"access_token": access_token,
+            "refresh_token": refresh_token_,
+            "token_type": messages.TOKEN_TYPE}
 
 
 @router.get("/refresh_token", response_model=TokenModel)
-async def refresh_token(credentials: HTTPAuthorizationCredentials = Security(security), db: Session = Depends(get_db)):
+async def refresh_token(credentials: HTTPAuthorizationCredentials = Security(security),
+                        db: Session = Depends(get_db)):
     """
     The refresh_token function is used to refresh the access token.
-        The function will check if the user has a valid refresh token and then create a new access token for them.
-        If they do not have a valid refresh_token, it will return an error.
+        The function will check if the user has a valid refresh token and then create
+        a new access token for them. If they do not have a valid refresh_token,
+        it will return an error.
 
-    :param credentials: HTTPAuthorizationCredentials: Get the credentials from the request header
+    :param credentials: HTTPAuthorizationCredentials: Get the credentials from the
+    request header
     :param db: Session: Pass the database session to the function
     :return: A new access token and refresh token
     :doc-author: Trelent
@@ -104,10 +113,11 @@ async def confirmed_email(token: str, db: Session = Depends(get_db)):
     """
     The confirmed_email function is used to confirm a user's email address.
     It takes the token from the URL and uses it to get the user's email address.
-    Then, it checks if that user exists in our database, and if they do not exist, we return an error message.
-    If they do exist but their account has already been confirmed, we return a message saying so. If neither
-    of these are true (i.e., the account exists and hasn't been confirmed yet), then we call repository_users'
-    confirm_email function with that email address as its argument.
+    Then, it checks if that user exists in our database, and if they do not exist,
+    we return an error message. If they do exist but their account has already been
+    confirmed, we return a message saying so. If neither of these are true
+    (i.e., the account exists and hasn't been confirmed yet), then we call
+    repository_users' confirm_email function with that email address as its argument.
 
     :param token: str: Get the email from the token
     :param db: Session: Get the database session
@@ -125,13 +135,16 @@ async def confirmed_email(token: str, db: Session = Depends(get_db)):
 
 
 @router.post('/request_email')
-async def request_email(body: RequestEmail, background_tasks: BackgroundTasks, request: Request,  # !!!
+async def request_email(body: RequestEmail, background_tasks: BackgroundTasks,
+                        request: Request,  # !!!
                         db: Session = Depends(get_db)):
     """
-    The request_email function is used to send an email the user with a link that will confirm their email address.
-    The function takes in a RequestEmail object, which contains the user's email address. The function then checks if
-    the user exists and if they are already confirmed. If they do exist and are not yet confirmed, it sends them an
-    email using the send_email() function from utils/mailgun_api.
+    The request_email function is used to send an email the user with a link
+    that will confirm their email address. The function takes in a RequestEmail
+    object, which contains the user's email address. The function then checks if
+    the user exists and if they are already confirmed. If they do exist and are
+    not yet confirmed, it sends them an email using the send_email() function
+    from utils/mailgun_api.
 
     :param body: RequestEmail: Receive the email from the user
     :param background_tasks: BackgroundTasks: Add a task to the background tasks queue
@@ -153,8 +166,9 @@ async def request_email(body: RequestEmail, background_tasks: BackgroundTasks, r
 async def reset_password(body: PasswordResetModel, db: Session = Depends(get_db)):
     """
     The reset_password function is used to reset a user's password.
-        It takes in the email of the user and their new password, which must be confirmed by entering it again.
-        If the email does not exist or if the passwords do not match, an error will be thrown.
+        It takes in the email of the user and their new password, which must be
+        confirmed by entering it again. If the email does not exist or if the
+        passwords do not match, an error will be thrown.
 
     :param body: PasswordResetModel: Get the data from the request body
     :param db: Session: Get the database session
