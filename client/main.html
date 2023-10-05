@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <h3>Cats List</h3>
+          <ul class="list-group" id="cats"></ul>
+        </div>
+        <div class="col-6">
+          <h3>Owners email List</h3>
+          <ul class="list-group" id="owners"></ul>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <form id="ownerCreate">
+            <div class="mb-3">
+              <label for="name" class="form-label"> Enter owner email </label>
+              <input
+                type="email"
+                class="form-control"
+                id="name"
+                name="email"
+                placeholder="name@example.com"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="javascript/app.js"></script>
+  </body>
+</html>
