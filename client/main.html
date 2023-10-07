@@ -15,25 +15,75 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <h3>Cats List</h3>
-          <ul class="list-group" id="cats"></ul>
+          <h3>Create a new contact</h3>
+          <!-- <ul class="list-group" id="contact"></ul> -->
         </div>
         <div class="col-6">
-          <h3>Owners email List</h3>
-          <ul class="list-group" id="owners"></ul>
+          <h3>Your Contacts List</h3>
+          <ul class="list-group" id="contacts"></ul>
         </div>
       </div>
       <div class="row mb-3">
         <div class="col-6">
-          <form id="ownerCreate">
+          <form id="contactCreate">
             <div class="mb-3">
-              <label for="name" class="form-label"> Enter owner email </label>
+              <label class="form-label"> Enter contact first name </label>
+              <input
+                type="text"
+                class="form-control"
+                id="first_name_id"
+                name="first_name"
+                placeholder="first name"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"> Enter contact last name </label>
+              <input
+                type="text"
+                class="form-control"
+                id="last_name_id"
+                name="last_name"
+                placeholder="last name"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"> Enter contact email </label>
               <input
                 type="email"
                 class="form-control"
-                id="name"
+                id="email_id"
                 name="email"
                 placeholder="name@example.com"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"> Enter contact phone number </label>
+              <input
+                type="text"
+                class="form-control"
+                id="phone_id"
+                name="phone"
+                placeholder="phone number"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"> Enter contact birth date </label>
+              <input
+                type="text"
+                class="form-control"
+                id="birthday_id"
+                name="birthday"
+                placeholder="YYYY-MM-DD"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"> Enter contact note </label>
+              <input
+                type="text"
+                class="form-control"
+                id="note_id"
+                name="note"
+                placeholder="text"
               />
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
