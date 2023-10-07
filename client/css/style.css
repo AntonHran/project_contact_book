@@ -95,3 +95,12 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.form-signup {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signup input[type="password"] {
+    margin-bottom: 10px;
+}
