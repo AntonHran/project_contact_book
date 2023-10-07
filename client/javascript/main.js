@@ -1,4 +1,4 @@
-const form = document.forms[0]
+const form = document.forms["loginForm"]
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault()
