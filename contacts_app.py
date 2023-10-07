@@ -46,13 +46,18 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )
 
-ALLOWED_IPS = [ip_address('192.168.1.0'), ip_address('172.16.0.0'), ip_address("127.0.0.1")]
+ALLOWED_IPS = [
+    ip_address('192.168.1.0'),
+    ip_address('172.28.192.1'),
+    ip_address('172.16.0.0'),
+    ip_address("127.0.0.1"),
+    ]
 
 
 @app.middleware("http")
