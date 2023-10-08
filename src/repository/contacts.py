@@ -3,6 +3,7 @@ import logging
 
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from libgravatar import Gravatar
 
 from src.database.models import Contact, User, UserToContact
 from src.schemes.contacts import ContactModel
@@ -96,7 +97,9 @@ async def create_contact(body: ContactModel, user: User, db: Session):
     :return: The contact object
     :doc-author: Trelent
     """
-    contact = Contact(**body.model_dump())
+    gr = Gravatar(body.email)
+    photo = gr.get_image()
+    contact = Contact(**body.model_dump(), photo=photo)
     try:
         db.add(contact)
         db.commit()
@@ -146,6 +149,10 @@ async def update(contact_id: int, body: ContactModel, user: User, db: Session):
     if contact:
         contact.first_name = body.first_name
         contact.last_name = body.last_name
+        contact.location = body.location
+        contact.company = body.company
+        contact.position = body.position
+        # contact.photo = body.photo
         contact.phone_number = body.phone_number
         contact.email = body.email
         contact.birth_date = body.birth_date
@@ -239,3 +246,11 @@ async def birthdays(user: User, db: Session):
         if b_date in dates:
             result.append(contact)
     return result
+
+
+async def update_photo(contact_id: int, url: str, user: User, db: Session):
+    contact = await get_contact_by_id(contact_id, user, db)
+    if contact:
+        contact.photo = url
+        db.commit()
+    return contact
