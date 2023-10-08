@@ -25,9 +25,13 @@ class Contact(Base):
     __tablename__ = "contacts"
 
     id = Column(Integer, primary_key=True)
-    first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=True)
+    first_name = Column(String(30), nullable=False)
+    last_name = Column(String(60), nullable=False)
+    location = Column(String(40), nullable=True)
+    company = Column(String(50), nullable=True)
+    position = Column(String(30), nullable=True)
+    photo = Column(String(255), nullable=True)
+    email = Column(String(150), unique=True, nullable=True)
     phone_number = Column(String, unique=True, nullable=False)
     birth_date = Column(Date, nullable=True)
     notes = Column(String, nullable=True)
