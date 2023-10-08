@@ -104,3 +104,19 @@ async def update_avatar(email: str, url: str, db: Session):
     user.avatar = url
     db.commit()
     return user
+
+
+async def get_all_users(limit: int, offset: int, db: Session):
+    return db.query(User).limit(limit).offset(offset).all()
+
+
+async def get_user_by_id(user_id: int, db: Session):
+    return db.query(User).filter_by(id=user_id).first()
+
+
+async def remove_user(user_id: int, db: Session):
+    user = await get_user_by_id(user_id, db)
+    if user:
+        db.delete(user)
+        db.commit()
+    return user
