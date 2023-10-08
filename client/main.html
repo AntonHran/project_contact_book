@@ -9,115 +9,144 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Profile</title>
   </head>
   <body>
+    <header>
+      <div class="container">
+        <nav class="navigation">
+          <div class="navigation-logo">
+            <svg class="icon" width="20" height="20">
+              <use href="./images/icons.svg#address-book"></use>
+            </svg>
+            <a href="./index.html" class="logo"
+              >Contacts<span class="accent">Pro</span></a
+            >
+          </div>
+        </nav>
+      </div>
+    </header>
     <div class="container">
       <div class="row">
-        <div class="col-6">
+        <!-- <div class="col-6">
           <h3>Create a new contact</h3>
-          <!-- <ul class="list-group" id="contact"></ul> -->
-        </div>
+          <ul class="list-group" id="contact"></ul>
+        </div> -->
         <div class="col-6">
-          <h3>Your Contacts List</h3>
-          <ul class="list-group" id="contacts"></ul>
+          <h2 class="title-contact">Your Contacts List</h2>
+
+          <ul id="contactsList" class="contacts-list">
+            <!-- JavaScript заповнить цей список -->
+          </ul>
+
+          <button class="btn-create" data-create-open>Add contact</button>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-6">
-          <form id="contactCreate">
-            <div class="mb-3">
-              <label class="form-label"> Enter contact first name </label>
-              <input
-                type="text"
-                class="form-control"
-                id="first_name_id"
-                name="first_name"
-                placeholder="first name"
+        <div class="row mb-3 backdrop is-hidden" data-create>
+          <div class="col-6 buy-window">
+            <button class="close-btn" data-create-close>
+              <img
+                class="close-icon"
+                src="./images/close.png"
+                alt="close"
+                width="30"
               />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact last name </label>
-              <input
-                type="text"
-                class="form-control"
-                id="last_name_id"
-                name="last_name"
-                placeholder="last name"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact location </label>
-              <input
-                type="text"
-                class="form-control"
-                id="location_id"
-                name="location"
-                placeholder="location"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact company </label>
-              <input
-                type="text"
-                class="form-control"
-                id="company_id"
-                name="company"
-                placeholder="company"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact position </label>
-              <input
-                type="text"
-                class="form-control"
-                id="position"
-                name="position"
-                placeholder="position"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact email </label>
-              <input
-                type="email"
-                class="form-control"
-                id="email_id"
-                name="email"
-                placeholder="name@example.com"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact phone number </label>
-              <input
-                type="text"
-                class="form-control"
-                id="phone_id"
-                name="phone"
-                placeholder="phone number"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact birth date </label>
-              <input
-                type="text"
-                class="form-control"
-                id="birthday_id"
-                name="birthday"
-                placeholder="YYYY-MM-DD"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"> Enter contact note </label>
-              <input
-                type="text"
-                class="form-control"
-                id="note_id"
-                name="note"
-                placeholder="text"
-              />
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-          </form>
+            </button>
+            <h2 class="title-contact">Create contact</h2>
+            <form id="contactCreate">
+              <div class="mb-3">
+                <label class="form-label"> Enter contact first name </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first_name_id"
+                  name="first_name"
+                  placeholder="first name"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact last name </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last_name_id"
+                  name="last_name"
+                  placeholder="last name"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact location </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="location_id"
+                  name="location"
+                  placeholder="location"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact company </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="company_id"
+                  name="company"
+                  placeholder="company"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact position </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="position"
+                  name="position"
+                  placeholder="position"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact email </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email_id"
+                  name="email"
+                  placeholder="name@example.com"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact phone number </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone_id"
+                  name="phone"
+                  placeholder="phone number"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact birth date </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="birthday_id"
+                  name="birthday"
+                  placeholder="YYYY-MM-DD"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"> Enter contact note </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="note_id"
+                  name="note"
+                  placeholder="text"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
