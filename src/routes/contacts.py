@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import Depends, HTTPException, Path, Query, APIRouter, status
+from fastapi import Depends, HTTPException, Path, Query, APIRouter, status, UploadFile, File
 from sqlalchemy.orm import Session
 from fastapi_limiter.depends import RateLimiter
 
@@ -10,12 +10,14 @@ from src.schemes.contacts import ContactModel, ContactResponse
 from src.database.models import User, Role
 from src.services.auth import auth_user
 from src.services.roles import RoleAccess
+from src.services.cloud_image import CloudImage
 
 
 router = APIRouter(prefix="/contacts", tags=["contacts"])
 
 allowed_get = RoleAccess([Role.admin, Role.moderator, Role.user])
 allowed_create = RoleAccess([Role.admin, Role.moderator, Role.user])
+allowed_photo_update = RoleAccess([Role.admin, Role.moderator, Role.user])
 allowed_update = RoleAccess([Role.admin, Role.moderator])
 allowed_remove = RoleAccess([Role.admin])
 allowed_search = RoleAccess([Role.admin, Role.moderator, Role.user])
@@ -187,3 +189,20 @@ async def get_birthdays(current_user: User = Depends(auth_user.get_current_user)
     if not contacts:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
     return contacts
+
+
+@router.patch("/photo/{contact_id}", response_model=ContactResponse,
+              dependencies=([Depends(allowed_photo_update)]),
+              description="For all")
+async def update_contact_photo(contact_id: int = Path(ge=1),
+                               file: UploadFile = File(),
+                               current_user: User = Depends(auth_user.get_current_user),
+                               db: Session = Depends(get_db)):
+    current_contact = await repository_contacts.get_contact_by_id(contact_id, current_user, db)
+    public_id = CloudImage.generate_name_avatar(current_contact.email)
+    res_file = CloudImage.upload(file.file, public_id)
+    src_url = CloudImage.get_url_for_avatar(public_id, res_file)
+    contact = await repository_contacts.update_photo(contact_id, src_url, current_user, db)
+    if not contact:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
+    return contact
