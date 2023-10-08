@@ -34,7 +34,7 @@
      }
 
      .container {
-         width: 1158px;
+         width: 1200px;
          padding: 0 15px;
          margin: 0 auto;
      }
@@ -140,6 +140,15 @@
             ------MAIN PART------ 
          ===========================  
          */
+
+.general {
+    display: flex;
+    gap: 50px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08), 0px 1px 1px 0px rgba(46, 47, 66, 0.16), 0px 1px 6px 0px rgba(46, 47, 66, 0.08);
+    padding: 20px;
+}
+
 .contactContainer {
     display: flex;
     align-items: center;
@@ -163,7 +172,8 @@
 }
 
 .contacts-list {
-height: 300px;
+    width: 400px;
+height: 400px;
 border: 1px solid gray;
 overflow-y: auto;
 margin-bottom: 20px;
@@ -177,18 +187,21 @@ margin-bottom: 20px;
 
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.contact:hover,
-.contact:focus {
-    background-color: gray;
+.contact:active {
+    background-color: #15B2F5;
 }
 
-.text-contact {
+.contact-details .text-contact {
     font-size: 16px;
 }
 
 .contact-details {
     display: flex;
     align-items: center;
+}
+
+.thumb-btn {
+    display: flex;
 }
 
 .btn-create {
@@ -214,6 +227,103 @@ margin-bottom: 20px;
 .btn-create:focus {
 background-color: #404BBF;
 }
+
+.first-contact {
+    width: 700px;
+}
+.field-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.fieldImage {
+    width: 250px;
+    border-radius: 50%;
+}
+.field-details {
+   display: flex;
+   justify-content: center;
+   margin-bottom: 20px;
+}
+
+.p-field-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    row-gap: 16px;
+}
+
+.field-details .text-contact {
+    font-weight: 700;
+}
+
+.field-info-location {
+background-image: url(../images/location.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+.field-info-company {
+    background-image: url(../images/company.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+.field-info-position {
+    background-image: url(../images/position.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+.field-info-email  {
+background-image: url(../images/email.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+.field-info-tel  {
+background-image: url(../images/phone.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+.field-info-birthday {
+background-image: url(../images/birthday.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+.field-info-note {
+background-image: url(../images/note.png);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: left;
+    padding-left: 25px;
+
+    width: calc((100% - 40px) / 2);
+}
+
+
 
 /*
          =========================== 
