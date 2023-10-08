@@ -10,14 +10,15 @@ form.addEventListener('submit', async (e) => {
         body: JSON.stringify({
             username: form.username.value,
             email: form.email.value,
-            password: form.password.value
+            password: form.password.value,
         }),
     })
     console.log(response.status, response.statusText)
-    if (response.status === 200) {
+    if (response.status === 201) {
         result = await response.json()
-        localStorage.setItem('userName', result.username)
-        localStorage.setItem('email', result.email)
+        console.log(result)
+        // localStorage.setItem('userName', result.username)
+        // localStorage.setItem('email', result.email)
         window.location = '/index.html'
     }
     else {
