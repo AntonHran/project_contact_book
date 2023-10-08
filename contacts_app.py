@@ -129,7 +129,7 @@ def healthchecker(db: Session = Depends(get_db)):
         return {"message": "Welcome to FastAPI"}
     except Exception as e:
         print(e)
-        raise HTTPException(status_code=500, detail="Error connecting to yhe database")
+        raise HTTPException(status_code=500, detail="Error connecting to the database")
 
 
 app.include_router(contacts.router, prefix="/api")
