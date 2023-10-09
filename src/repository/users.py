@@ -107,16 +107,59 @@ async def update_avatar(email: str, url: str, db: Session):
 
 
 async def get_all_users(limit: int, offset: int, db: Session):
+
+    """
+    The get_all_users function returns a list of all users in the database.
+
+    :param limit: int: Limit the number of results returned
+    :param offset: int: Specify the number of records to skip
+    :param db: Session: Pass the database session to the function
+    :return: A list of all the users in the database
+    :doc-author: Trelent
+    """
     return db.query(User).limit(limit).offset(offset).all()
 
 
 async def get_user_by_id(user_id: int, db: Session):
+
+    """
+    The get_user_by_id function takes in a user_id and db Session object,
+    and returns the User object with that id. If no such user exists, it returns None.
+
+    :param user_id: int: Specify the type of parameter that is expected
+    :param db: Session: Pass the database session to the function
+    :return: The user with the given id
+    :doc-author: Trelent
+    """
     return db.query(User).filter_by(id=user_id).first()
 
 
 async def remove_user(user_id: int, db: Session):
+
+    """
+    The remove_user function removes a user from the database.
+        Args:
+            user_id (int): The id of the user to be removed.
+            db (Session): A connection to the database.
+
+    :param user_id: int: Specify the user_id of the user to be deleted
+    :param db: Session: Pass the database session to the function
+    :return: The user that was deleted
+    :doc-author: Trelent
+    """
     user = await get_user_by_id(user_id, db)
     if user:
         db.delete(user)
         db.commit()
     return user
+
+
+async def invalidate_tokens(user: User, db: Session):
+    """
+    Invalidate a user's access and refresh tokens.
+
+    :param user: User: The user for whom to invalidate tokens
+    :param db: Session: The database session
+    """
+    user.refresh_token = "invalid"
+    db.commit()
