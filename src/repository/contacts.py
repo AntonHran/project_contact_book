@@ -249,6 +249,20 @@ async def birthdays(user: User, db: Session):
 
 
 async def update_photo(contact_id: int, url: str, user: User, db: Session):
+
+    """
+    The update_photo function updates the photo of a contact.
+        Args:
+            contact_id (int): The id of the contact to update.
+            url (str): The new URL for the photo.
+
+    :param contact_id: int: Specify the contact that will be updated
+    :param url: str: Update the photo url of a contact
+    :param user: User: Check if the user is logged in
+    :param db: Session: Pass the database session to the function
+    :return: The contact object
+    :doc-author: Trelent
+    """
     contact = await get_contact_by_id(contact_id, user, db)
     if contact:
         contact.photo = url
