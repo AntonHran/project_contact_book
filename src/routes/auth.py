@@ -11,8 +11,9 @@ from src.database.connection import get_db
 from src.repository import users as repository_users
 from src.schemes.users import UserModel, UserResponse, TokenModel
 from src.schemes.email import RequestEmail, PasswordResetModel
-from src.services.auth import auth_token, auth_password
+from src.services.auth import auth_token, auth_password, auth_user
 from src.services.email import send_email
+from src.database.models import User
 from src.conf import messages
 
 
@@ -184,3 +185,21 @@ async def reset_password(body: PasswordResetModel, db: Session = Depends(get_db)
     new_password = auth_password.get_password_hash(body.new_password)
     await repository_users.reset_password(user, new_password, db)
     return {"message": "Password reset complete!"}
+
+
+@router.post("/logout")
+async def logout(
+        current_user: User = Depends(auth_user.get_current_user), db: Session = Depends(get_db)
+):
+    """
+    The logout function is used to log out the currently authenticated user.
+    It invalidates the user's access token and refresh token.
+
+    :param current_user: User: The currently authenticated user (obtained from JWT)
+    :param db: Session: Get a database session
+    :return: A message indicating successful logout
+    :doc-author: Trelent
+    """
+    await repository_users.invalidate_tokens(current_user, db)
+
+    return {"message": "Logout successful"}
