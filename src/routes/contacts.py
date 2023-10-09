@@ -198,6 +198,17 @@ async def update_contact_photo(contact_id: int = Path(ge=1),
                                file: UploadFile = File(),
                                current_user: User = Depends(auth_user.get_current_user),
                                db: Session = Depends(get_db)):
+
+    """
+    The update_contact_photo function updates the contact photo of a given contact.
+
+    :param contact_id: int: Get the contact id from the path
+    :param file: UploadFile: Upload a file to the server
+    :param current_user: User: Get the current user who is logged in
+    :param db: Session: Get the database session
+    :return: A contact object
+    :doc-author: Trelent
+    """
     current_contact = await repository_contacts.get_contact_by_id(contact_id, current_user, db)
     public_id = CloudImage.generate_name_avatar(current_contact.email)
     res_file = CloudImage.upload(file.file, public_id)
