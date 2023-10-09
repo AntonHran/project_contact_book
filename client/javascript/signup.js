@@ -12,10 +12,10 @@ form.addEventListener('submit', async (e) => {
             email: form.email.value,
             password: form.password.value,
         }),
-    })
+    });
     console.log(response.status, response.statusText)
     if (response.status === 201) {
-        result = await response.json()
+        let result = await response.json()
         console.log(result)
         // localStorage.setItem('userName', result.username)
         // localStorage.setItem('email', result.email)
