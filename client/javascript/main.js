@@ -11,10 +11,10 @@ form.addEventListener('submit', async (e) => {
             username: form.username.value,
             password: form.password.value
         }),
-    })
+    });
     console.log(response.status, response.statusText)
     if (response.status === 200) {
-        result = await response.json()
+        let result = await response.json()
         localStorage.setItem('accessToken', result.access_token)
         localStorage.setItem('refreshToken', result.refresh_token)
         window.location = '/main.html'
