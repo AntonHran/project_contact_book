@@ -60,12 +60,9 @@ const get_contacts = async () => {
       let nameElement = document.createElement("h3");
       nameElement.textContent = `${contact.first_name} ${contact.last_name}`;
       nameElement.className = "text-contact";
-      // let idElement = document.createElement("p");
-      // idElement.textContent = `ID: ${contact.id}`;
 
       // Додаємо всі елементи до контейнера деталей
       detailsContainer.appendChild(nameElement);
-      // detailsContainer.appendChild(idElement);
 
       // Додаємо контейнери до елемента списку
       contactElement.appendChild(imageContainer);
@@ -91,9 +88,33 @@ const get_contact = async (contact_id) => {
   console.log(response.status, response.statusText);
   if (response.status === 200) {
     const result = await response.json();
+/**
+ * The get_contact function fetches a contact from the server and displays it on the page.
+ *
+ *
+ *
+ * @param contact_id Get the contact from the database
+
+/**
+ * the delete_contact function deletes a contact from the server
+ *
+ * @return A promise that resolves to a contact object
+ *
+ * @docauthor Trelent
+ */
+/**
+ * The get_contact function fetches a contact from the server and displays it on the page.
+ *
+ *
+ * @param contact_id Get the contact from the database
+ *
+ * @return A promise that resolves to a contact object
+ *
+ * @docauthor Trelent
+ */
     const contact = document.getElementById("contact-id");
     contact.innerHTML = "";
-    //for (let field of result) {
+
     // Створюємо новий елемент списку (li) для кожного поля контакта
     let fieldElement = document.createElement("li");
     fieldElement.className = "field";
@@ -120,7 +141,7 @@ const get_contact = async (contact_id) => {
     let pContainer = document.createElement("div");
     pContainer.className = "p-field-details";
 
-    // Додаємо ім'я контакту та ID
+    // Додаємо інші поля контакту
     let nameElement = document.createElement("h3");
     nameElement.textContent = `${result.first_name} ${result.last_name}`;
     nameElement.className = "text-contact";
@@ -163,7 +184,6 @@ const get_contact = async (contact_id) => {
 
     // Додаємо елемент контакту до списку
     contact.appendChild(fieldElement);
-    //};
   }
 };
 
@@ -197,25 +217,6 @@ contactCreate.addEventListener("submit", async (e) => {
   }
 });
 
-const get_owners = async () => {
-  const response = await fetch("http://localhost:8000/api/owners", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  console.log(response.status, response.statusText);
-  if (response.status === 200) {
-    result = await response.json();
-    owners.innerHTML = "";
-    for (owner of result) {
-      el = document.createElement("li");
-      el.className = "list-group-item";
-      el.innerHTML = `ID: ${owner.id} email: ${owner.email}`;
-      owners.appendChild(el);
-    }
-  }
-};
 
 (() => {
   const refs = {
@@ -231,17 +232,3 @@ const get_owners = async () => {
     refs.modal.classList.toggle("is-hidden");
   }
 })();
-
-//let el_1 = document.createElement("img");
-//            el_1.className = 'image';
-//            el_1.src = contact.photo;
-//            let el = document.createElement('theListBox');
-//            el.className = 'selectedItem';
-//            el.innerHTML = `ID: ${contact.id} Full name: <b>${contact.first_name} ${contact.last_name}</b>`;
-//                            //<br> Location: ${contact.location} <br>
-//                            //Company: ${contact.company} <br> Position: ${contact.position}
-//                            //Photo: ${contact.photo} <br> Email: ${contact.email} <br>
-//                            //Phone number: ${contact.phone_number} <br> Birthday: ${contact.birth_date} <br>
-//                            //Notes: ${contact.notes}
-//            contacts.appendChild(el_1);
-//            contacts.appendChild(el);
