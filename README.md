@@ -31,7 +31,8 @@ admin has the whole user functionality plus:
 
 In addition, the application has its own client (frontend), that has been written with HTML/CSS and JavaScript. The Client represents only the main functionality of the project and requires to be completed.
 
+Also, the project has Documentation that is placed in folder docs.
+
 
 License: None
-Documentation link:
 
