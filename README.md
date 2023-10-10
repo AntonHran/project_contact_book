@@ -35,5 +35,3 @@ In addition, the application has its own client (frontend), that has been writte
 License: None
 Documentation link:
 
-Program expansion and improvement. Description of the idea:
-
